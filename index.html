@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="ta" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="meta-title-tag">Blue Skin | Luxury Botanical Skincare</title>
+  <meta id="meta-desc-tag" name="description" content="Blue Skin - Pure luxury handcrafted cosmetic formulations, deep ocean hydration, and botanical nourishment." />
+  
+  <!-- CSS Framework -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+
+  <!-- Google Luxury Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      background-color: #050B17;
+      color: #F8FAFC;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    .font-serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+    .glass-card {
+      background: rgba(15, 30, 56, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-nav {
+      background: rgba(5, 11, 23, 0.90);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFFFFF 15%, #E5BA73 65%, #C89945 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #0A1428;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #1e3a5f;
+      border-radius: 9999px;
+    }
+    .view-container {
+      transition: opacity 0.25s ease-in-out;
+    }
+  </style>
+</head>
+<body class="selection:bg-blue-600 selection:text-white">
+
+  <!-- TOP ANNOUNCEMENT BAR (CMS Managed) -->
+  <div id="top-announcement" class="w-full bg-blue-950 border-b border-blue-900 border-opacity-40 text-xs py-2.5 px-4 text-center tracking-widest text-gray-300 font-medium">
+    ✦ COMPLIMENTARY EXPRESS DOORSTEP DELIVERY ON ALL CURATED ORDERS ✦
+  </div>
+
+  <!-- NAVIGATION BAR (Pure Luxury & Minimal) -->
+  <header class="sticky top-0 z-40 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="javascript:void(0)" onclick="navigateTo('home')" class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-full border border-blue-400 border-opacity-40 flex items-center justify-center bg-blue-950 shadow-md">
+          <span class="font-serif text-xl font-bold tracking-tighter text-blue-300">B</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-serif text-2xl tracking-widest font-semibold text-white uppercase" id="nav-brand-title">BLUE SKIN</span>
+          <span class="text-xs tracking-widest text-gray-400 uppercase -mt-1">Cosmetics & Pure Care</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center space-x-10 text-xs uppercase tracking-widest font-medium text-gray-300">
+        <a href="javascript:void(0)" onclick="navigateTo('home')" id="nav-link-portfolio" class="hover:text-blue-300 transition-colors text-blue-400 font-semibold border-b border-blue-400 pb-1">Brand Portfolio</a>
+        <a href="#about-philosophy" onclick="ensureHomeAndScroll('about-philosophy')" class="hover:text-blue-300 transition-colors">Philosophy</a>
+        <a href="#clinical-science" onclick="ensureHomeAndScroll('clinical-science')" class="hover:text-blue-300 transition-colors">Botanical Science</a>
+        <a href="#artisan-craft" onclick="ensureHomeAndScroll('artisan-craft')" class="hover:text-blue-300 transition-colors">Artisan Craft</a>
+      </nav>
+
+      <!-- Action Area: Front Page only has "Shop Now"; Shop View has Cart Button -->
+      <div class="flex items-center space-x-4">
+        
+        <!-- Pure Shop Now Button on Front Page (No overlapping words) -->
+        <button id="nav-shop-btn" onclick="navigateTo('shop')" class="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-xs uppercase tracking-widest font-semibold text-white bg-blue-600 hover:bg-blue-500 shadow-lg transition-all">
+          <span class="flex items-center space-x-2">
+            <span>Shop Now</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5 inline"></i>
+          </span>
+        </button>
+
+        <!-- Shop View Only: Cart Icon (Hidden on Home Page) -->
+        <button id="nav-cart-btn" onclick="toggleCartDrawer(true)" class="hidden relative p-2.5 rounded-full bg-gray-900 border border-gray-700 text-blue-300 hover:text-white transition-all">
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          <span id="nav-cart-count" class="absolute -top-1 -right-1 bg-blue-500 text-gray-950 font-bold text-xs w-5 h-5 rounded-full flex items-center justify-center shadow-lg">0</span>
+        </button>
+
+        <!-- Secret Admin Shortcut -->
+        <button onclick="navigateTo('admin')" title="Admin Dashboard (#admin)" class="p-2 text-gray-500 hover:text-gray-300 transition-colors">
+          <i data-lucide="settings" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- 1. FRONT END: PURE LUXURY BRAND PORTFOLIO PAGE                            -->
+  <!-- ========================================================================= -->
+  <main id="view-home" class="view-container">
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-screen flex items-center justify-center px-6 pt-12 pb-24 text-center">
+      <div class="max-w-4xl mx-auto space-y-8">
+        
+        <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-blue-400 border-opacity-30 bg-blue-950 text-blue-300 text-xs uppercase tracking-widest font-medium">
+          <span class="w-2 h-2 rounded-full bg-blue-400 inline-block"></span>
+          <span id="hero-tag-display">Pure Ocean Hydration & Botanical Care</span>
+        </div>
+
+        <h1 class="font-serif text-5xl sm:text-7xl font-normal text-white leading-tight" id="hero-title-display">
+          Radiance Born From <br />
+          <span class="gold-gradient-text italic font-medium">Ocean & Earth</span>
+        </h1>
+
+        <p class="max-w-2xl mx-auto text-gray-300 text-base sm:text-lg font-light leading-relaxed" id="hero-subtitle-display">
+          Blue Skin redefines clean cosmetics. Handcrafted cold-cured soaps, deep-penetrating peptide moisturizers, and restorative botanical creams engineered for timeless nourishment.
+        </p>
+
+        <!-- Clean Shop Now Button (Non-overlapping) -->
+        <div class="pt-6 flex justify-center items-center">
+          <button onclick="navigateTo('shop')" class="px-8 py-4 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs uppercase tracking-widest shadow-xl transition-all flex items-center space-x-2">
+            <span id="hero-cta-text">Shop Now</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Metric Milestones -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-16 border-t border-gray-800 max-w-4xl mx-auto">
+          <div class="space-y-1">
+            <div class="font-serif text-3xl sm:text-4xl text-white font-light">100%</div>
+            <div class="text-xs uppercase tracking-wider text-gray-400">Cold-Processed</div>
+          </div>
+          <div class="space-y-1">
+            <div class="font-serif text-3xl sm:text-4xl text-white font-light">Zero</div>
+            <div class="text-xs uppercase tracking-wider text-gray-400">Parabens & Toxins</div>
+          </div>
+          <div class="space-y-1">
+            <div class="font-serif text-3xl sm:text-4xl text-white font-light">72h</div>
+            <div class="text-xs uppercase tracking-wider text-gray-400">Deep Hydration</div>
+          </div>
+          <div class="space-y-1">
+            <div class="font-serif text-3xl sm:text-4xl text-white font-light">Cruelty-Free</div>
+            <div class="text-xs uppercase tracking-wider text-gray-400">Ethically Sourced</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: BRAND PHILOSOPHY & STORY -->
+    <section id="about-philosophy" class="py-24 px-6 border-t border-gray-800 bg-gray-900 bg-opacity-40">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        
+        <div class="lg:col-span-5">
+          <div class="relative mx-auto max-w-md rounded-3xl overflow-hidden border border-gray-700 shadow-2xl">
+            <img id="portfolio-img-1" src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1000&q=80" alt="Blue Skin Aesthetics" class="w-full h-96 object-cover">
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-6">
+          <div class="text-xs uppercase tracking-widest text-blue-400 font-semibold" id="about-tag">About Blue Skin</div>
+          <h2 class="font-serif text-4xl sm:text-5xl text-white font-normal" id="about-title">
+            Crafted for discerning skin that demands pure, active botanicals.
+          </h2>
+          <p class="text-gray-300 leading-relaxed font-light text-base" id="about-para-1">
+            Founded with a singular vision, Blue Skin engineers biocompatible creams, artisan cold-cured soaps, and moisture-locking emulsions. We ban harsh sulphates, petrochemical fillers, and synthetic fragrances, focusing strictly on high-performance marine extracts and organic plant lipids.
+          </p>
+          <p class="text-gray-400 leading-relaxed font-light text-sm" id="about-para-2">
+            Every formula is tested dermatologically to penetrate epidermal layers without leaving a greasy sheen. Whether battling city pollutants or dry climates, Blue Skin restores your innate skin barrier balance.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: BOTANICAL SCIENCE & KEY INGREDIENTS -->
+    <section id="clinical-science" class="py-24 px-6 border-t border-gray-800">
+      <div class="max-w-6xl mx-auto space-y-16">
+        
+        <div class="text-center max-w-2xl mx-auto space-y-4">
+          <div class="text-xs uppercase tracking-widest text-blue-400 font-semibold">The Core Pillars</div>
+          <h2 class="font-serif text-4xl sm:text-5xl text-white font-normal">Signature Formulations</h2>
+          <p class="text-gray-400 text-sm font-light leading-relaxed">
+            Our master soap crafters and cosmetic scientists isolate active bio-compounds that work in synergy with human dermal tissue.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <div class="glass-card p-8 rounded-3xl space-y-5">
+            <div class="w-12 h-12 rounded-xl bg-blue-950 border border-blue-400 border-opacity-30 flex items-center justify-center text-blue-400">
+              <i data-lucide="droplet" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-serif text-2xl text-white">Micro-Algae & Squalane</h3>
+            <p class="text-gray-400 text-sm font-light leading-relaxed">
+              Extracted from deep underwater beds, oceanic micro-algae infuses essential amino acids that boost natural collagen synthesis and lock in moisture.
+            </p>
+          </div>
+
+          <div class="glass-card p-8 rounded-3xl space-y-5">
+            <div class="w-12 h-12 rounded-xl bg-blue-950 border border-blue-400 border-opacity-30 flex items-center justify-center text-blue-400">
+              <i data-lucide="sparkles" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-serif text-2xl text-white">Cold-Cured Shea Soaps</h3>
+            <p class="text-gray-400 text-sm font-light leading-relaxed">
+              Unlike industrial detergent bars, our handcrafted soaps cure naturally over 45 days, preserving natural glycerin that cleanses without stripping oils.
+            </p>
+          </div>
+
+          <div class="glass-card p-8 rounded-3xl space-y-5">
+            <div class="w-12 h-12 rounded-xl bg-blue-950 border border-blue-400 border-opacity-30 flex items-center justify-center text-blue-400">
+              <i data-lucide="shield-check" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-serif text-2xl text-white">Barrier Defense Peptides</h3>
+            <p class="text-gray-400 text-sm font-light leading-relaxed">
+              Custom botanical peptides soothe redness from sun exposure and create a breathable shield against environmental dust and pollution.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: ARTISAN CRAFT & RITUAL -->
+    <section id="artisan-craft" class="py-24 px-6 border-t border-gray-800 bg-gray-900 bg-opacity-20">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        
+        <div class="space-y-6">
+          <div class="text-xs uppercase tracking-widest text-blue-400 font-semibold">The Daily Regimen</div>
+          <h2 class="font-serif text-4xl sm:text-5xl text-white font-normal">Three steps to radiant skin.</h2>
+          
+          <div class="space-y-6 pt-4">
+            <div class="flex space-x-4">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full border border-blue-400 text-blue-300 flex items-center justify-center font-serif">1</div>
+              <div>
+                <h4 class="text-white font-medium text-base">Purify with Blue Artisan Soap</h4>
+                <p class="text-gray-400 text-sm font-light mt-1">Lifts grime and impurities while enriching the epidermis with botanical saponins.</p>
+              </div>
+            </div>
+
+            <div class="flex space-x-4">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full border border-blue-400 text-blue-300 flex items-center justify-center font-serif">2</div>
+              <div>
+                <h4 class="text-white font-medium text-base">Hydrate with Ocean Moisture Emulsion</h4>
+                <p class="text-gray-400 text-sm font-light mt-1">Dispense 2 drops and press upward onto cheekbones for continuous all-day water-retention.</p>
+              </div>
+            </div>
+
+            <div class="flex space-x-4">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full border border-blue-400 text-blue-300 flex items-center justify-center font-serif">3</div>
+              <div>
+                <h4 class="text-white font-medium text-base">Protect with Blue Peptide Cream</h4>
+                <p class="text-gray-400 text-sm font-light mt-1">Locks in vital nutrients while building an invisible environmental shield.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="rounded-3xl overflow-hidden border border-gray-700 shadow-2xl">
+            <img id="portfolio-img-2" src="https://images.unsplash.com/photo-1608248597359-04c99547146d?auto=format&fit=crop&w=1000&q=80" alt="Artisan Botanical Ingredients" class="w-full h-96 object-cover">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5: FINAL CLEAN CTA -->
+    <section class="py-24 px-6 border-t border-gray-800 text-center">
+      <div class="max-w-3xl mx-auto space-y-6">
+        <h2 class="font-serif text-4xl sm:text-5xl text-white font-light">
+          Ready to experience the Blue Skin touch?
+        </h2>
+        <p class="text-gray-300 text-base font-light">
+          Explore our handcrafted line of soaps, deep moisturizers, and creams.
+        </p>
+        <div class="pt-2">
+          <button onclick="navigateTo('shop')" class="px-8 py-4 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs uppercase tracking-widest shadow-xl transition-all">
+            Shop Now
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ========================================================================= -->
+  <!-- 2. SECOND PAGE: SHOP & E-COMMERCE CATALOG (Categories & Add to Cart)      -->
+  <!-- ========================================================================= -->
+  <section id="view-shop" class="view-container hidden min-h-screen py-12 px-6">
+    <div class="max-w-7xl mx-auto space-y-10">
+      
+      <!-- Shop Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-gray-800 pb-8">
+        <div>
+          <div class="text-xs uppercase tracking-widest text-blue-400 font-semibold">Official Store</div>
+          <h1 class="font-serif text-4xl sm:text-5xl text-white mt-1">Curated Catalog</h1>
+          <p class="text-gray-400 text-sm font-light mt-2">Select products to add to your order. Check out directly via verified WhatsApp order dispatch.</p>
+        </div>
+
+        <div class="flex items-center space-x-4">
+          <button onclick="navigateTo('home')" class="px-5 py-2.5 rounded-full border border-gray-700 text-gray-300 hover:text-white text-xs uppercase tracking-widest transition-all">
+            ← Brand Story
+          </button>
+          
+          <button onclick="toggleCartDrawer(true)" class="px-6 py-2.5 rounded-full bg-blue-600 text-white font-medium text-xs uppercase tracking-widest shadow-lg flex items-center space-x-2">
+            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+            <span>View Bag (<span id="shop-cart-count-inline">0</span>)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Categories Filter Lineup (Horizontal) -->
+      <div class="space-y-3">
+        <div class="text-xs uppercase tracking-widest text-gray-400 font-medium">Categories:</div>
+        <div class="flex items-center space-x-3 overflow-x-auto pb-2 custom-scroll" id="categories-pill-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Product Catalog Grid -->
+      <div id="shop-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 3. ADMIN PANEL: (#admin) WITH INDIVIDUAL PAGE CMS & SEO CONTROLS          -->
+  <!-- ========================================================================= -->
+  <section id="view-admin" class="view-container hidden min-h-screen py-12 px-6">
+    <div class="max-w-7xl mx-auto space-y-10">
+
+      <!-- Admin Top Banner -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-800 pb-6">
+        <div>
+          <div class="inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-yellow-400 font-semibold">
+            <i data-lucide="shield" class="w-4 h-4"></i>
+            <span>Administrative Control Center</span>
+          </div>
+          <h1 class="font-serif text-3xl sm:text-4xl text-white mt-1">Blue Skin Master CMS</h1>
+          <p class="text-gray-400 text-xs mt-1">Manage individual frontend portfolio texts, shop catalog products, images, and Google/Meta SEO tags.</p>
+        </div>
+        
+        <div class="flex items-center space-x-3">
+          <button onclick="saveAllCmsChanges()" class="px-6 py-2.5 rounded-xl bg-green-600 text-white font-medium text-xs uppercase tracking-wider shadow-lg hover:bg-green-500 transition-all flex items-center space-x-2">
+            <i data-lucide="check" class="w-4 h-4"></i>
+            <span>Save All Changes</span>
+          </button>
+          <button onclick="navigateTo('home')" class="px-5 py-2.5 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs uppercase tracking-wider transition-all">
+            Exit Admin
+          </button>
+        </div>
+      </div>
+
+      <!-- Admin Navigation Tabs -->
+      <div class="flex items-center space-x-3 border-b border-gray-800 overflow-x-auto custom-scroll pb-1">
+        <button onclick="switchAdminTab('tab-home-cms')" id="btn-tab-home-cms" class="admin-tab-btn px-5 py-3 text-xs uppercase tracking-wider font-semibold border-b-2 border-blue-400 text-blue-300 flex items-center space-x-2">
+          <i data-lucide="layout" class="w-4 h-4"></i>
+          <span>Home Portfolio CMS</span>
+        </button>
+        <button onclick="switchAdminTab('tab-shop-cms')" id="btn-tab-shop-cms" class="admin-tab-btn px-5 py-3 text-xs uppercase tracking-wider font-semibold border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex items-center space-x-2">
+          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          <span>Shop & Products CMS</span>
+        </button>
+        <button onclick="switchAdminTab('tab-seo-cms')" id="btn-tab-seo-cms" class="admin-tab-btn px-5 py-3 text-xs uppercase tracking-wider font-semibold border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex items-center space-x-2">
+          <i data-lucide="globe" class="w-4 h-4"></i>
+          <span>SEO & Tracking (Google/Meta)</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: HOME PAGE CMS -->
+      <div id="tab-home-cms" class="admin-tab-content space-y-8">
+        <div class="glass-card p-8 rounded-3xl space-y-6">
+          <h3 class="text-lg font-medium text-white flex items-center space-x-2 border-b border-gray-800 pb-3">
+            <i data-lucide="sparkles" class="w-5 h-5 text-blue-400"></i>
+            <span>Hero & Announcement Bar Content</span>
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Top Announcement Bar Text</label>
+              <input type="text" id="cms-announcement-input" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400" />
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Hero Small Badge / Tag</label>
+              <input type="text" id="cms-hero-tag-input" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400" />
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Hero Main Headline (HTML Allowed)</label>
+              <input type="text" id="cms-hero-title-input" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400" />
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Hero Subtitle Paragraph</label>
+              <textarea id="cms-hero-subtitle-input" rows="3" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Shop Button Label</label>
+              <input type="text" id="cms-hero-btn-input" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400" />
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">WhatsApp Receiving Number (With Country Code)</label>
+              <input type="text" id="cms-whatsapp-input" placeholder="919876543210" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400" />
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card p-8 rounded-3xl space-y-6">
+          <h3 class="text-lg font-medium text-white flex items-center space-x-2 border-b border-gray-800 pb-3">
+            <i data-lucide="image" class="w-5 h-5 text-blue-400"></i>
+            <span>Philosophy Section Images & Content</span>
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Story Section Image URL</label>
+              <input type="text" id="cms-story-img-input" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400" />
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Ritual Section Image URL</label>
+              <input type="text" id="cms-ritual-img-input" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400" />
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Story Section Heading</label>
+              <input type="text" id="cms-story-title-input" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400" />
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Story Paragraph 1</label>
+              <textarea id="cms-story-p1-input" rows="3" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400"></textarea>
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Story Paragraph 2</label>
+              <textarea id="cms-story-p2-input" rows="3" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: SHOP & PRODUCTS CMS -->
+      <div id="tab-shop-cms" class="admin-tab-content hidden space-y-8">
+        
+        <!-- Add New Product Form -->
+        <div class="glass-card p-8 rounded-3xl space-y-6">
+          <div class="flex items-center justify-between border-b border-gray-800 pb-3">
+            <h3 class="text-lg font-medium text-white flex items-center space-x-2">
+              <i data-lucide="plus-circle" class="w-5 h-5 text-green-400"></i>
+              <span>Add New Product to Shop</span>
+            </h3>
+          </div>
+
+          <form id="add-product-form" onsubmit="handleAddNewProduct(event)" class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Product Name *</label>
+              <input type="text" id="new-prod-name" placeholder="e.g. Deep Hydrating Soap" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400" />
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Category *</label>
+              <select id="new-prod-category" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400">
+                <option value="Creams">Creams</option>
+                <option value="Soaps">Soaps</option>
+                <option value="Moisturizers">Moisturizers</option>
+                <option value="Serums">Serums</option>
+                <option value="Special Care">Special Care</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Price (INR ₹) *</label>
+              <input type="number" id="new-prod-price" placeholder="850" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400" />
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Image URL *</label>
+              <input type="url" id="new-prod-image" placeholder="https://images.unsplash.com/..." required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400" />
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Volume / Size</label>
+              <input type="text" id="new-prod-size" placeholder="100g / 50ml" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400" />
+            </div>
+            <div class="md:col-span-3">
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Brief Description *</label>
+              <textarea id="new-prod-desc" rows="2" placeholder="Cold-pressed botanical oils infused with ocean minerals..." required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400"></textarea>
+            </div>
+            <div class="md:col-span-3 flex justify-end">
+              <button type="submit" class="px-8 py-3 rounded-xl bg-blue-500 hover:bg-blue-400 text-gray-950 font-bold text-xs uppercase tracking-widest transition-all">
+                Publish Product
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Live Products Inventory List -->
+        <div class="glass-card p-8 rounded-3xl space-y-6">
+          <h3 class="text-lg font-medium text-white flex items-center justify-between border-b border-gray-800 pb-3">
+            <span class="flex items-center space-x-2">
+              <i data-lucide="layers" class="w-5 h-5 text-blue-400"></i>
+              <span>Active Catalog Products (<span id="admin-product-count">0</span> items)</span>
+            </span>
+          </h3>
+
+          <div class="overflow-x-auto custom-scroll">
+            <table class="w-full text-left text-sm text-gray-300">
+              <thead class="bg-gray-900 text-xs uppercase tracking-wider text-gray-400 border-b border-gray-800">
+                <tr>
+                  <th class="p-4">Item</th>
+                  <th class="p-4">Category</th>
+                  <th class="p-4">Price</th>
+                  <th class="p-4">Volume</th>
+                  <th class="p-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-products-table-body" class="divide-y divide-gray-800">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TAB 3: SEO, GOOGLE SEARCH CONSOLE & META PIXEL -->
+      <div id="tab-seo-cms" class="admin-tab-content hidden space-y-8">
+        <div class="glass-card p-8 rounded-3xl space-y-6">
+          <h3 class="text-lg font-medium text-white flex items-center space-x-2 border-b border-gray-800 pb-3">
+            <i data-lucide="globe" class="w-5 h-5 text-blue-400"></i>
+            <span>Google Search Console, Meta Pixel & SEO</span>
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+            <div class="md:col-span-2">
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Meta Title</label>
+              <input type="text" id="seo-meta-title" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400" />
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Meta Description</label>
+              <textarea id="seo-meta-desc" rows="3" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Google Search Console Verification Tag</label>
+              <input type="text" id="seo-gsc-tag" placeholder="google-site-verification=..." class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400" />
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Meta / Facebook Pixel ID</label>
+              <input type="text" id="seo-meta-pixel" placeholder="1234567890" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-400" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 4. SLIDEOUT SHOPPING BAG DRAWER (Shop View Only)                         -->
+  <!-- ========================================================================= -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 pointer-events-none transition-all duration-300">
+    <div id="cart-backdrop" onclick="toggleCartDrawer(false)" class="absolute inset-0 bg-black bg-opacity-70 opacity-0 transition-opacity duration-300"></div>
+    
+    <div id="cart-panel" class="absolute top-0 right-0 w-full max-w-md h-full bg-gray-900 border-l border-gray-800 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col pointer-events-auto">
+      
+      <div class="p-6 border-b border-gray-800 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <i data-lucide="shopping-bag" class="w-5 h-5 text-blue-400"></i>
+          <h3 class="font-serif text-2xl text-white">Your Selection</h3>
+        </div>
+        <button onclick="toggleCartDrawer(false)" class="p-2 text-gray-400 hover:text-white transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4 custom-scroll">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div class="p-6 border-t border-gray-800 space-y-4 bg-gray-950">
+        <div class="flex items-center justify-between text-sm">
+          <span class="text-gray-400">Total:</span>
+          <span id="cart-total-amount" class="text-2xl font-serif text-white font-medium">₹0</span>
+        </div>
+        <button onclick="openCheckoutModal()" id="cart-checkout-btn" disabled class="w-full py-4 rounded-full bg-blue-600 text-white font-medium text-xs uppercase tracking-widest shadow-lg transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+          Proceed To WhatsApp Checkout
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- 5. MANDATORY CHECKOUT MODAL (Name, Phone, Email, Address, Pincode)        -->
+  <!-- ========================================================================= -->
+  <div id="checkout-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black bg-opacity-80">
+    <div class="w-full max-w-lg glass-card rounded-3xl p-8 border border-gray-700 shadow-2xl relative space-y-6 max-h-screen overflow-y-auto custom-scroll">
+      
+      <button onclick="closeCheckoutModal()" class="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div>
+        <div class="text-xs uppercase tracking-widest text-blue-400 font-semibold">Delivery Details</div>
+        <h3 class="font-serif text-3xl text-white mt-1">Shipping Information</h3>
+        <p class="text-xs text-gray-400 mt-1">Your order will be formatted and sent directly via WhatsApp to our concierge.</p>
+      </div>
+
+      <form id="order-dispatch-form" onsubmit="handleDispatchToWhatsApp(event)" class="space-y-4 text-sm">
+        
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-gray-300 mb-1">Full Name *</label>
+          <input type="text" id="cust-name" required placeholder="Your Name" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-100 focus:outline-none focus:border-blue-400" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-gray-300 mb-1">WhatsApp Number *</label>
+            <input type="tel" id="cust-phone" required placeholder="9876543210" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-100 focus:outline-none focus:border-blue-400" />
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-gray-300 mb-1">Email ID *</label>
+            <input type="email" id="cust-email" required placeholder="name@domain.com" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-100 focus:outline-none focus:border-blue-400" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-gray-300 mb-1">Doorstep Address *</label>
+          <textarea id="cust-address" required rows="2" placeholder="House/Flat No, Street, Landmark" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-100 focus:outline-none focus:border-blue-400"></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-gray-300 mb-1">City / District *</label>
+            <input type="text" id="cust-city" required placeholder="Coimbatore" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-100 focus:outline-none focus:border-blue-400" />
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-gray-300 mb-1">Postal Pincode *</label>
+            <input type="text" id="cust-pincode" required placeholder="641006" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-gray-100 focus:outline-none focus:border-blue-400" />
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" class="w-full py-4 rounded-full bg-green-600 hover:bg-green-500 text-white font-medium text-xs uppercase tracking-widest shadow-lg transition-all flex items-center justify-center space-x-2">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+            <span>Send Order via WhatsApp</span>
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- FOOTER                                                                    -->
+  <!-- ========================================================================= -->
+  <footer class="border-t border-gray-800 bg-gray-950 py-16 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+      <div>
+        <div class="font-serif text-2xl font-bold tracking-widest text-white uppercase">BLUE SKIN</div>
+        <p class="text-xs text-gray-400 tracking-wider mt-1">Luxury Botanical Cosmetics & Formulation Lab.</p>
+      </div>
+
+      <div class="flex items-center space-x-8 text-xs uppercase tracking-widest text-gray-400">
+        <a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-white transition-colors">Portfolio</a>
+        <a href="javascript:void(0)" onclick="navigateTo('shop')" class="hover:text-white transition-colors">Shop Catalog</a>
+        <a href="javascript:void(0)" onclick="navigateTo('admin')" class="hover:text-white transition-colors">Admin CMS</a>
+      </div>
+
+      <div class="text-xs text-gray-500">
+        &copy; 2026 Blue Skin Organics. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- JAVASCRIPT APPLICATION LOGIC & STATE PERSISTENCE -->
+  <script>
+    const INITIAL_PRODUCTS = [
+      {
+        id: "prod-1",
+        name: "Blue Peptide Marine Face Cream",
+        category: "Creams",
+        price: 1250,
+        size: "50ml",
+        image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=700&q=80",
+        desc: "Marine micro-algae peptides and cold-extracted squalane for deep moisture barrier restoration."
+      },
+      {
+        id: "prod-2",
+        name: "Artisan Sea Clay & Charcoal Soap",
+        category: "Soaps",
+        price: 340,
+        size: "125g Bar",
+        image: "https://images.unsplash.com/photo-1607006314644-245151522f18?auto=format&fit=crop&w=700&q=80",
+        desc: "Handcrafted 45-day cured cold soap with French blue clay, activated coconut charcoal, and raw shea butter."
+      },
+      {
+        id: "prod-3",
+        name: "Ocean Glow Hydrating Moisturizer",
+        category: "Moisturizers",
+        price: 980,
+        size: "100ml",
+        image: "https://images.unsplash.com/photo-1608248597359-04c99547146d?auto=format&fit=crop&w=700&q=80",
+        desc: "Lightweight daytime emulsion enriched with hyaluronic acid tri-complex and botanical blue tansy."
+      },
+      {
+        id: "prod-4",
+        name: "Midnight Botanical Barrier Repair Cream",
+        category: "Creams",
+        price: 1450,
+        size: "50ml",
+        image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=700&q=80",
+        desc: "Overnight cellular recovery cream with ceramide NP, gotu kola, and organic blue spirulina."
+      },
+      {
+        id: "prod-5",
+        name: "Oat Milk & Blue Agave Gentle Soap",
+        category: "Soaps",
+        price: 320,
+        size: "125g Bar",
+        image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=700&q=80",
+        desc: "Ultra-soothing pH balanced formulation suited for sensitive and inflammation-prone skin."
+      },
+      {
+        id: "prod-6",
+        name: "Deep Dew Bio-Active Moisturizer",
+        category: "Moisturizers",
+        price: 1100,
+        size: "80ml",
+        image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80",
+        desc: "72-hour moisture-lock formulation formulated with olive squalane and oceanic algae."
+      }
+    ];
+
+    const DEFAULT_CMS = {
+      announcement: "✦ COMPLIMENTARY EXPRESS DOORSTEP DELIVERY ON ALL CURATED ORDERS ✦",
+      heroTag: "Pure Ocean Hydration & Botanical Care",
+      heroTitle: "Radiance Born From <br /><span class=\"gold-gradient-text italic font-medium\">Ocean & Earth</span>",
+      heroSubtitle: "Blue Skin redefines clean cosmetics. Handcrafted soaps, deep-penetrating peptide moisturizers, and restorative face creams engineered for timeless nourishment.",
+      heroBtn: "Shop Now",
+      whatsappNumber: "919876543210",
+      storyImg: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1000&q=80",
+      ritualImg: "https://images.unsplash.com/photo-1608248597359-04c99547146d?auto=format&fit=crop&w=1000&q=80",
+      storyTitle: "Crafted for discerning skin that demands pure, active botanicals.",
+      storyP1: "Founded with a singular vision, Blue Skin engineers biocompatible creams, artisan cold-cured soaps, and moisture-locking emulsions. We ban harsh sulphates, petrochemical fillers, and synthetic fragrances, focusing strictly on high-performance marine extracts and organic plant lipids.",
+      storyP2: "Every formula is tested dermatologically to penetrate epidermal layers without leaving a greasy sheen. Whether battling city pollutants or dry climates, Blue Skin restores your innate skin barrier balance.",
+      metaTitle: "Blue Skin | Luxury Botanical Skincare & Handcrafted Cosmetics",
+      metaDesc: "Blue Skin - Pure luxury handcrafted cosmetic formulations, deep ocean hydration, and botanical nourishment.",
+      gscTag: "gsc-verification-code-xyz",
+      metaPixel: "123456789012345"
+    };
+
+    let products = JSON.parse(localStorage.getItem('blueskin_products')) || INITIAL_PRODUCTS;
+    let cmsData = JSON.parse(localStorage.getItem('blueskin_cms')) || DEFAULT_CMS;
+    let cart = JSON.parse(localStorage.getItem('blueskin_cart')) || [];
+    let selectedCategory = "All";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      applyCmsToFrontend();
+      renderCategoryFilters();
+      renderShopProducts();
+      renderCartUI();
+      renderAdminProductsTable();
+      populateAdminFields();
+      lucide.createIcons();
+
+      handleHashNavigation();
+      window.addEventListener("hashchange", handleHashNavigation);
+    });
+
+    function navigateTo(viewName) {
+      if (viewName === 'home') {
+        window.location.hash = '';
+      } else {
+        window.location.hash = viewName;
+      }
+    }
+
+    function handleHashNavigation() {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      
+      const homeView = document.getElementById('view-home');
+      const shopView = document.getElementById('view-shop');
+      const adminView = document.getElementById('view-admin');
+      
+      const navShopBtn = document.getElementById('nav-shop-btn');
+      const navCartBtn = document.getElementById('nav-cart-btn');
+
+      if (hash === 'admin') {
+        homeView.classList.add('hidden');
+        shopView.classList.add('hidden');
+        adminView.classList.remove('hidden');
+        navShopBtn.classList.remove('hidden');
+        navCartBtn.classList.add('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === 'shop') {
+        homeView.classList.add('hidden');
+        shopView.classList.remove('hidden');
+        adminView.classList.add('hidden');
+        navShopBtn.classList.add('hidden');
+        navCartBtn.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        // Pure front-end portfolio view
+        homeView.classList.remove('hidden');
+        shopView.classList.add('hidden');
+        adminView.classList.add('hidden');
+        navShopBtn.classList.remove('hidden');
+        navCartBtn.classList.add('hidden'); // Cart hidden on Home page
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      lucide.createIcons();
+    }
+
+    function ensureHomeAndScroll(sectionId) {
+      if (window.location.hash === '#shop' || window.location.hash === '#admin') {
+        window.location.hash = '';
+        setTimeout(() => {
+          const el = document.getElementById(sectionId);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      } else {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function applyCmsToFrontend() {
+      document.getElementById('top-announcement').innerText = cmsData.announcement;
+      document.getElementById('hero-tag-display').innerText = cmsData.heroTag;
+      document.getElementById('hero-title-display').innerHTML = cmsData.heroTitle;
+      document.getElementById('hero-subtitle-display').innerText = cmsData.heroSubtitle;
+      document.getElementById('hero-cta-text').innerText = cmsData.heroBtn;
+      
+      document.getElementById('portfolio-img-1').src = cmsData.storyImg;
+      document.getElementById('portfolio-img-2').src = cmsData.ritualImg;
+      document.getElementById('about-title').innerText = cmsData.storyTitle;
+      document.getElementById('about-para-1').innerText = cmsData.storyP1;
+      document.getElementById('about-para-2').innerText = cmsData.storyP2;
+
+      document.title = cmsData.metaTitle;
+      document.getElementById('meta-desc-tag').setAttribute("content", cmsData.metaDesc);
+    }
+
+    function renderCategoryFilters() {
+      const categories = ["All", ...new Set(products.map(p => p.category))];
+      const container = document.getElementById('categories-pill-container');
+      
+      container.innerHTML = categories.map(cat => {
+        const isActive = cat === selectedCategory;
+        const classes = isActive 
+          ? "bg-blue-500 text-gray-950 font-bold shadow-md" 
+          : "bg-gray-900 border border-gray-700 text-gray-300 hover:text-white";
+        return `
+          <button onclick="setCategory('${cat}')" class="whitespace-nowrap px-6 py-2 rounded-full text-xs uppercase tracking-widest transition-all ${classes}">
+            ${cat}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function setCategory(cat) {
+      selectedCategory = cat;
+      renderCategoryFilters();
+      renderShopProducts();
+    }
+
+    function renderShopProducts() {
+      const grid = document.getElementById('shop-products-grid');
+      const filtered = selectedCategory === "All" 
+        ? products 
+        : products.filter(p => p.category === selectedCategory);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-16 text-center text-gray-400">No products found in this category.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => `
+        <div class="glass-card rounded-3xl overflow-hidden border border-gray-800 hover:border-blue-500 transition-all flex flex-col group">
+          <div class="h-60 w-full overflow-hidden bg-gray-900 relative">
+            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
+            <span class="absolute top-4 left-4 bg-gray-950 bg-opacity-80 px-3 py-1 rounded-full text-xs uppercase tracking-widest text-blue-300 border border-gray-700">
+              ${item.category}
+            </span>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-start justify-between">
+                <h3 class="font-serif text-xl text-white font-medium">${item.name}</h3>
+                <span class="text-xs text-gray-400">${item.size || ''}</span>
+              </div>
+              <p class="text-gray-400 text-xs font-light mt-2">${item.desc}</p>
+            </div>
+            
+            <div class="pt-2 border-t border-gray-800 flex items-center justify-between">
+              <span class="font-serif text-2xl text-white font-semibold">₹${item.price.toLocaleString('en-IN')}</span>
+              
+              <button onclick="addToCart('${item.id}')" class="px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs uppercase tracking-wider font-semibold transition-all flex items-center space-x-1.5">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                <span>Add to Bag</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function addToCart(productId) {
+      const prod = products.find(p => p.id === productId);
+      if (!prod) return;
+
+      const existing = cart.find(c => c.id === productId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({
+          id: prod.id,
+          name: prod.name,
+          price: prod.price,
+          image: prod.image,
+          category: prod.category,
+          qty: 1
+        });
+      }
+
+      saveCart();
+      toggleCartDrawer(true);
+    }
+
+    function updateCartQty(productId, delta) {
+      const item = cart.find(c => c.id === productId);
+      if (!item) return;
+
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(c => c.id !== productId);
+      }
+      saveCart();
+    }
+
+    function saveCart() {
+      localStorage.setItem('blueskin_cart', JSON.stringify(cart));
+      renderCartUI();
+    }
+
+    function renderCartUI() {
+      const count = cart.reduce((acc, curr) => acc + curr.qty, 0);
+      const total = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
+
+      document.getElementById('nav-cart-count').innerText = count;
+      document.getElementById('shop-cart-count-inline').innerText = count;
+      document.getElementById('cart-total-amount').innerText = `₹${total.toLocaleString('en-IN')}`;
+
+      const checkoutBtn = document.getElementById('cart-checkout-btn');
+      if (count > 0) {
+        checkoutBtn.removeAttribute('disabled');
+      } else {
+        checkoutBtn.setAttribute('disabled', 'true');
+      }
+
+      const container = document.getElementById('cart-items-container');
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="h-64 flex flex-col items-center justify-center text-center text-gray-500 space-y-3">
+            <i data-lucide="shopping-bag" class="w-10 h-10 text-gray-600"></i>
+            <p class="text-sm font-light">Your shopping bag is empty.</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = cart.map(item => `
+          <div class="flex space-x-4 p-3 rounded-2xl bg-gray-900 border border-gray-800">
+            <img src="${item.image}" class="w-16 h-16 rounded-xl object-cover" alt="${item.name}">
+            <div class="flex-1 flex flex-col justify-between">
+              <div>
+                <h4 class="text-white text-xs font-medium">${item.name}</h4>
+                <div class="text-xs text-blue-400">₹${item.price.toLocaleString('en-IN')}</div>
+              </div>
+              <div class="flex items-center space-x-3">
+                <button onclick="updateCartQty('${item.id}', -1)" class="w-6 h-6 rounded-md bg-gray-800 text-gray-300 flex items-center justify-center text-xs">-</button>
+                <span class="text-xs font-semibold text-white">${item.qty}</span>
+                <button onclick="updateCartQty('${item.id}', 1)" class="w-6 h-6 rounded-md bg-gray-800 text-gray-300 flex items-center justify-center text-xs">+</button>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="text-xs font-medium text-white">₹${(item.price * item.qty).toLocaleString('en-IN')}</span>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      lucide.createIcons();
+    }
+
+    function toggleCartDrawer(open) {
+      const drawer = document.getElementById('cart-drawer');
+      const backdrop = document.getElementById('cart-backdrop');
+      const panel = document.getElementById('cart-panel');
+
+      if (open) {
+        drawer.classList.remove('pointer-events-none');
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+        panel.classList.remove('translate-x-full');
+      } else {
+        backdrop.classList.add('opacity-0');
+        panel.classList.add('translate-x-full');
+        setTimeout(() => {
+          drawer.classList.add('pointer-events-none');
+        }, 300);
+      }
+    }
+
+    function openCheckoutModal() {
+      if (cart.length === 0) return;
+      toggleCartDrawer(false);
+      document.getElementById('checkout-modal').classList.remove('hidden');
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkout-modal').classList.add('hidden');
+    }
+
+    function handleDispatchToWhatsApp(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('cust-name').value.trim();
+      const phone = document.getElementById('cust-phone').value.trim();
+      const email = document.getElementById('cust-email').value.trim();
+      const address = document.getElementById('cust-address').value.trim();
+      const city = document.getElementById('cust-city').value.trim();
+      const pincode = document.getElementById('cust-pincode').value.trim();
+
+      const total = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
+      
+      let itemsListStr = cart.map((c, i) => `• ${c.name} (${c.category}) x ${c.qty} = ₹${c.price * c.qty}`).join('\n');
+
+      const msg = `*BLUE SKIN COSMETICS - NEW ORDER DISPATCH* 🌿✨\n\n` +
+                  `*Customer Details:*\n` +
+                  `👤 Name: ${name}\n` +
+                  `📞 Phone: ${phone}\n` +
+                  `✉️ Email: ${email}\n` +
+                  `📍 Address: ${address}, ${city} - ${pincode}\n\n` +
+                  `*Order Items:*\n` +
+                  `${itemsListStr}\n\n` +
+                  `*Total Order Amount:* ₹${total.toLocaleString('en-IN')}\n\n` +
+                  `Kindly confirm availability & express shipping schedule. Thank you!`;
+
+      const targetNumber = cmsData.whatsappNumber || "919876543210";
+      const waUrl = `https://wa.me/${targetNumber}?text=${encodeURIComponent(msg)}`;
+
+      cart = [];
+      saveCart();
+      closeCheckoutModal();
+      window.open(waUrl, '_blank');
+    }
+
+    function switchAdminTab(tabId) {
+      document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        btn.classList.remove('border-blue-400', 'text-blue-300');
+        btn.classList.add('border-transparent', 'text-gray-400');
+      });
+
+      document.getElementById(tabId).classList.remove('hidden');
+      const activeBtn = document.getElementById(`btn-${tabId}`);
+      if (activeBtn) {
+        activeBtn.classList.add('border-blue-400', 'text-blue-300');
+        activeBtn.classList.remove('border-transparent', 'text-gray-400');
+      }
+    }
+
+    function populateAdminFields() {
+      document.getElementById('cms-announcement-input').value = cmsData.announcement;
+      document.getElementById('cms-hero-tag-input').value = cmsData.heroTag;
+      document.getElementById('cms-hero-title-input').value = cmsData.heroTitle;
+      document.getElementById('cms-hero-subtitle-input').value = cmsData.heroSubtitle;
+      document.getElementById('cms-hero-btn-input').value = cmsData.heroBtn;
+      document.getElementById('cms-whatsapp-input').value = cmsData.whatsappNumber;
+
+      document.getElementById('cms-story-img-input').value = cmsData.storyImg;
+      document.getElementById('cms-ritual-img-input').value = cmsData.ritualImg;
+      document.getElementById('cms-story-title-input').value = cmsData.storyTitle;
+      document.getElementById('cms-story-p1-input').value = cmsData.storyP1;
+      document.getElementById('cms-story-p2-input').value = cmsData.storyP2;
+
+      document.getElementById('seo-meta-title').value = cmsData.metaTitle;
+      document.getElementById('seo-meta-desc').value = cmsData.metaDesc;
+      document.getElementById('seo-gsc-tag').value = cmsData.gscTag;
+      document.getElementById('seo-meta-pixel').value = cmsData.metaPixel;
+    }
+
+    function saveAllCmsChanges() {
+      cmsData.announcement = document.getElementById('cms-announcement-input').value;
+      cmsData.heroTag = document.getElementById('cms-hero-tag-input').value;
+      cmsData.heroTitle = document.getElementById('cms-hero-title-input').value;
+      cmsData.heroSubtitle = document.getElementById('cms-hero-subtitle-input').value;
+      cmsData.heroBtn = document.getElementById('cms-hero-btn-input').value;
+      cmsData.whatsappNumber = document.getElementById('cms-whatsapp-input').value;
+
+      cmsData.storyImg = document.getElementById('cms-story-img-input').value;
+      cmsData.ritualImg = document.getElementById('cms-ritual-img-input').value;
+      cmsData.storyTitle = document.getElementById('cms-story-title-input').value;
+      cmsData.storyP1 = document.getElementById('cms-story-p1-input').value;
+      cmsData.storyP2 = document.getElementById('cms-story-p2-input').value;
+
+      cmsData.metaTitle = document.getElementById('seo-meta-title').value;
+      cmsData.metaDesc = document.getElementById('seo-meta-desc').value;
+      cmsData.gscTag = document.getElementById('seo-gsc-tag').value;
+      cmsData.metaPixel = document.getElementById('seo-meta-pixel').value;
+
+      localStorage.setItem('blueskin_cms', JSON.stringify(cmsData));
+      applyCmsToFrontend();
+      alert('✓ All CMS edits & SEO configurations saved successfully!');
+    }
+
+    function handleAddNewProduct(e) {
+      e.preventDefault();
+      
+      const newProd = {
+        id: "prod-" + Date.now(),
+        name: document.getElementById('new-prod-name').value.trim(),
+        category: document.getElementById('new-prod-category').value,
+        price: parseFloat(document.getElementById('new-prod-price').value),
+        image: document.getElementById('new-prod-image').value.trim(),
+        size: document.getElementById('new-prod-size').value.trim(),
+        desc: document.getElementById('new-prod-desc').value.trim()
+      };
+
+      products.unshift(newProd);
+      localStorage.setItem('blueskin_products', JSON.stringify(products));
+
+      document.getElementById('add-product-form').reset();
+      renderCategoryFilters();
+      renderShopProducts();
+      renderAdminProductsTable();
+      alert('✓ New product successfully added to the catalog!');
+    }
+
+    function deleteProduct(prodId) {
+      if (!confirm('Are you sure you want to remove this product?')) return;
+      products = products.filter(p => p.id !== prodId);
+      localStorage.setItem('blueskin_products', JSON.stringify(products));
+      renderCategoryFilters();
+      renderShopProducts();
+      renderAdminProductsTable();
+    }
+
+    function renderAdminProductsTable() {
+      document.getElementById('admin-product-count').innerText = products.length;
+      const tbody = document.getElementById('admin-products-table-body');
+      
+      tbody.innerHTML = products.map(p => `
+        <tr class="hover:bg-gray-900">
+          <td class="p-4 flex items-center space-x-3">
+            <img src="${p.image}" class="w-10 h-10 rounded-lg object-cover" alt="${p.name}">
+            <div>
+              <div class="font-medium text-white">${p.name}</div>
+              <div class="text-xs text-gray-500">${p.id}</div>
+            </div>
+          </td>
+          <td class="p-4 text-blue-400 text-xs uppercase tracking-wider">${p.category}</td>
+          <td class="p-4 font-serif text-white">₹${p.price.toLocaleString('en-IN')}</td>
+          <td class="p-4 text-gray-400 text-xs">${p.size || '-'}</td>
+          <td class="p-4 text-right">
+            <button onclick="deleteProduct('${p.id}')" class="text-red-400 hover:text-red-300 text-xs uppercase tracking-wider font-semibold">
+              Delete
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+  </script>
+</body>
+</html>
