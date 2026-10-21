@@ -4740,7 +4740,7 @@
       const finalAmount = totalAmount > 0 ? totalAmount : 10;
       const orderId = "BS-" + Date.now();
 
-      // அசல் YOUPI GATEWAY SDK CALL (போர்ட் 7000 & 6100)
+      // OFFICIAL YOUPI FULL ARCHITECTURE TRIGGER
       if (window.Youpi) {
         window.Youpi.pay({
           apiUrl: "http://localhost:6100",
@@ -4756,8 +4756,7 @@
             email: email
           },
           handler: function(response) {
-            console.log("YOUPI Verified Payment Response:", response);
-            // கேட்வே உறுதிப்படுத்திய பிறகு மட்டுமே வெப்சைட்டில் ஆர்டர் உறுதி செய்யப்படும்
+            console.log("YOUPI Verified Payment:", response);
             confirmOrderCreation("YOUPI_GATEWAY_SUCCESS");
           },
           onClose: function() {
@@ -4767,9 +4766,10 @@
           }
         });
       } else {
-        alert("YOUPI SDK லோட் ஆகவில்லை! http://localhost:7000 போர்ட் ஆன்லைனில் உள்ளதா என பார்க்கவும்.");
+        alert("YOUPI SDK லோட் ஆகவில்லை! லோக்கல் சர்வரில் போர்ட் 7000 மற்றும் 6100 ஆன்லைனில் உள்ளதா என சரிபார்க்கவும்.");
       }
     }
+    
     // --- 15. PAYMENT GATEWAY SANDBOX ---
     function openRazorpayPaymentModal() {
       const keys = Object.keys(cart);
