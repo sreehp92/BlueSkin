@@ -60,6 +60,9 @@
   
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- YOUPI Gateway SDK -->
+  <script src="http://localhost:7000/youpi.js" data-youpi-key="00000000-0000-0000-0000-000000000001"></script>
 
   <style>
     :root {
@@ -4731,7 +4734,35 @@
       }
 
       closeCheckoutModal();
-      openRazorpayPaymentModal();
+
+      // Total amount calculation
+      const keys = Object.keys(cart);
+      const totalAmount = keys.reduce((sum, id) => {
+        const p = products.find(x => x.id === id);
+        return sum + (p ? p.price * cart[id] : 0);
+      }, 0);
+
+      // YOUPI Gateway Trigger
+      if (window.Youpi) {
+        window.Youpi.pay({
+          order_id: "BS-" + Date.now(),
+          amount: totalAmount,
+          currency: "INR",
+          customer: {
+            name: document.getElementById('cust-name').value.trim(),
+            phone: document.getElementById('cust-phone').value.trim(),
+            email: document.getElementById('cust-email').value.trim()
+          },
+          handler: function(response) {
+            confirmOrderCreation("UPI_YOUPI");
+          },
+          onClose: function() {
+            showLuxuryToast("Payment cancelled.");
+          }
+        });
+      } else {
+        openRazorpayPaymentModal();
+      }
     }
 
     // --- 15. PAYMENT GATEWAY SANDBOX ---
@@ -5559,6 +5590,13 @@
       try { handleHashNavigation(); } catch (e) { console.error('Hash nav error:', e); }
       try { initLuxuryCanvas(); } catch (e) { console.error('Canvas error:', e); }
 
+      // YOUPI Bank Auto-Success Listener
+      window.addEventListener('youpi:payment:success', function(event) {
+        showLuxuryToast("✦ Payment Verified via Bank Observer!");
+        confirmOrderCreation("UPI_YOUPI");
+      });
+
+      
       let cookiesOk = false;
       try { cookiesOk = localStorage.getItem('blueskin_cookies_accepted') === 'true'; } catch (e) {}
       if (cookiesOk) hideCookieBanner();
