@@ -4750,20 +4750,32 @@
       // YOUPI Gateway Trigger
       if (window.Youpi) {
         window.Youpi.pay({
+          apiUrl: "http://localhost:6100",
+          portalUrl: "http://localhost:7000",
           order_id: "BS-" + Date.now(),
-          amount: totalAmount,
+          amount: String(totalAmount || 10),
           currency: "INR",
+          name: "Blue Skin Atelier",
+          description: "Botanical Formulations Order",
           customer: {
-            name: document.getElementById('cust-name').value.trim(),
-            phone: document.getElementById('cust-phone').value.trim(),
-            email: document.getElementById('cust-email').value.trim()
+            name: document.getElementById('cust-name').value.trim() || "Customer",
+            phone: document.getElementById('cust-phone').value.trim() || "9876543210",
+            email: document.getElementById('cust-email').value.trim() || "guest@blueskin.in"
           },
           handler: function(response) {
+            console.log("YOUPI Success:", response);
             confirmOrderCreation("UPI_YOUPI");
           },
+          onFailed: function(err) {
+            console.error("YOUPI Payment Failed:", err);
+            showLuxuryToast("Payment Failed: " + (err.reason || "Error"));
+          },
           onClose: function() {
-            showLuxuryToast("Payment cancelled.");
+            showLuxuryToast("Payment window closed.");
           }
+        }).catch(function(err) {
+          console.error("Payment Start Error:", err);
+          showLuxuryToast("Gateway Connect Error. Check Console.");
         });
       } else {
         openRazorpayPaymentModal();
