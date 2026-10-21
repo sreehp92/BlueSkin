@@ -64,7 +64,7 @@
   <!-- YOUPI Gateway SDK -->
   <script 
     src="http://localhost:7000/youpi.js"
-    data-api-url="http://localhost:7000"
+    data-api-url="http://localhost:6100"
     data-portal-url="http://localhost:7000">
   </script>
 
@@ -4746,33 +4746,32 @@
         return sum + (p ? p.price * cart[id] : 0);
       }, 0);
 
-      // DIRECT INSTANT UPI QR (No WhatsApp, No OTP, No Login)
-      const upiId = "eze0447140@cub";
-      const merchantName = "Blue Skin Atelier";
-      const orderId = "BS-" + Date.now();
-      const finalAmount = totalAmount || 10;
-      const upiUrl = "upi://pay?pa=" + upiId + "&pn=" + encodeURIComponent(merchantName) + "&am=" + finalAmount + "&cu=INR&tn=" + orderId;
-      const qrCodeImageUrl = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(upiUrl);
-
-      // Remove any existing modal if already open
-      const oldModal = document.getElementById('direct-upi-modal');
-      if (oldModal) oldModal.remove();
-
-      const modalHtml = `
-        <div id="direct-upi-modal" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);display:flex;align-items:center;justify-content:center;z-index:999999;">
-          <div style="background:#ffffff;padding:24px;border-radius:14px;text-align:center;max-width:320px;width:90%;box-shadow:0 12px 30px rgba(0,0,0,0.35);font-family:sans-serif;">
-            <h3 style="margin:0 0 8px 0;color:#1e293b;font-size:18px;">Scan & Pay with UPI</h3>
-            <p style="margin:0 0 14px 0;color:#0f172a;font-weight:bold;font-size:18px;">₹${finalAmount}</p>
-            <div style="display:inline-block;padding:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:12px;">
-              <img src="${qrCodeImageUrl}" alt="UPI QR" style="width:190px;height:190px;display:block;" />
-            </div>
-            <p style="font-size:12px;color:#64748b;margin:0 0 16px 0;">GPay, PhonePe, Paytm மூலம் ஸ்கேன் செய்யவும்</p>
-            <button onclick="document.getElementById('direct-upi-modal').remove(); confirmOrderCreation('UPI_DIRECT');" style="background:#16a34a;color:#ffffff;border:none;padding:11px 16px;border-radius:8px;cursor:pointer;font-weight:bold;width:100%;font-size:14px;margin-bottom:8px;">நான் பணம் செலுத்திவிட்டேன் (Paid)</button>
-            <button onclick="document.getElementById('direct-upi-modal').remove();" style="background:#f1f5f9;color:#475569;border:none;padding:9px 16px;border-radius:8px;cursor:pointer;width:100%;font-size:13px;">ரத்து செய் (Cancel)</button>
-          </div>
-        </div>
-      `;
-      document.body.insertAdjacentHTML('beforeend', modalHtml);
+      // OFFICIAL YOUPI FULL-FEATURED GATEWAY INTEGRATION
+      if (window.Youpi) {
+        window.Youpi.pay({
+          apiUrl: "http://localhost:6100",
+          portalUrl: "http://localhost:7000",
+          order_id: "BS-" + Date.now(),
+          amount: String(totalAmount || 10),
+          currency: "INR",
+          name: "Blue Skin Atelier",
+          description: "Botanical Formulations Order",
+          customer: {
+            name: document.getElementById('cust-name') ? document.getElementById('cust-name').value.trim() : "Customer",
+            phone: document.getElementById('cust-phone') ? document.getElementById('cust-phone').value.trim() : "",
+            email: document.getElementById('cust-email') ? document.getElementById('cust-email').value.trim() : "order@blueskin.in"
+          },
+          handler: function(response) {
+            console.log("YOUPI Success:", response);
+            confirmOrderCreation("YOUPI_PAYMENT_GATEWAY");
+          },
+          onClose: function() {
+            showLuxuryToast("Payment checkout cancelled.");
+          }
+        });
+      } else {
+        alert("YOUPI SDK லோட் ஆகவில்லை. போர்ட் 7000 இயங்குகிறதா என பார்க்கவும்.");
+      }
     }
 
     // --- 15. PAYMENT GATEWAY SANDBOX ---
