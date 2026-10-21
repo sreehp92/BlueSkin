@@ -63,9 +63,8 @@
   
   <!-- YOUPI Gateway SDK -->
   <script 
-    src="http://localhost:7000/youpi.js" 
-    data-youpi-key="00000000-0000-0000-0000-000000000001"
-    data-api-url="http://localhost:6100"
+    src="http://localhost:7000/youpi.js"
+    data-api-url="http://localhost:7000"
     data-portal-url="http://localhost:7000">
   </script>
 
@@ -4750,7 +4749,7 @@
       // YOUPI Gateway Trigger
       if (window.Youpi) {
         window.Youpi.pay({
-          apiUrl: "http://localhost:6100",
+          apiUrl: "http://localhost:7000",
           portalUrl: "http://localhost:7000",
           order_id: "BS-" + Date.now(),
           amount: String(totalAmount || 10),
@@ -4763,24 +4762,13 @@
             email: document.getElementById('cust-email').value.trim() || "guest@blueskin.in"
           },
           handler: function(response) {
-            console.log("YOUPI Success:", response);
             confirmOrderCreation("UPI_YOUPI");
-          },
-          onFailed: function(err) {
-            console.error("YOUPI Payment Failed:", err);
-            showLuxuryToast("Payment Failed: " + (err.reason || "Error"));
           },
           onClose: function() {
             showLuxuryToast("Payment window closed.");
           }
-        }).catch(function(err) {
-          console.error("Payment Start Error:", err);
-          showLuxuryToast("Gateway Connect Error. Check Console.");
         });
-      } else {
-        openRazorpayPaymentModal();
       }
-    }
 
     // --- 15. PAYMENT GATEWAY SANDBOX ---
     function openRazorpayPaymentModal() {
