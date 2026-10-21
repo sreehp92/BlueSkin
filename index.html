@@ -4719,21 +4719,12 @@
     }
 
     function proceedToPaymentWithValidation() {
-      const botTrap = document.getElementById('bot-trap');
-      if (botTrap && botTrap.value) {
-        console.warn("Spam bot interaction detected.");
-        return;
-      }
+      const name = document.getElementById('cust-name') ? document.getElementById('cust-name').value.trim() : '';
+      const phone = document.getElementById('cust-phone') ? document.getElementById('cust-phone').value.trim() : '';
+      const email = document.getElementById('cust-email') ? document.getElementById('cust-email').value.trim() : 'guest@blueskin.in';
 
-      const f1 = validateCheckoutField('cust-name');
-      const f2 = validateCheckoutField('cust-phone');
-      const f3 = validateCheckoutField('cust-email');
-      const f4 = validateCheckoutField('cust-address');
-      const f5 = validateCheckoutField('cust-city');
-      const f6 = validateCheckoutField('cust-pincode');
-
-      if (!f1 || !f2 || !f3 || !f4 || !f5 || !f6) {
-        showLuxuryToast("⚠️ Please review the warning fields before proceeding.");
+      if (!name || phone.length !== 10) {
+        alert("தயவுசெய்து சரியான பெயர் மற்றும் 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்.");
         return;
       }
 
@@ -4746,34 +4737,39 @@
         return sum + (p ? p.price * cart[id] : 0);
       }, 0);
 
-      // OFFICIAL YOUPI FULL-FEATURED GATEWAY INTEGRATION
+      const finalAmount = totalAmount > 0 ? totalAmount : 10;
+      const orderId = "BS-" + Date.now();
+
+      // அசல் YOUPI GATEWAY SDK CALL (போர்ட் 7000 & 6100)
       if (window.Youpi) {
         window.Youpi.pay({
           apiUrl: "http://localhost:6100",
           portalUrl: "http://localhost:7000",
-          order_id: "BS-" + Date.now(),
-          amount: String(totalAmount || 10),
+          order_id: orderId,
+          amount: String(finalAmount),
           currency: "INR",
           name: "Blue Skin Atelier",
-          description: "Botanical Formulations Order",
+          description: "Botanical Order " + orderId,
           customer: {
-            name: document.getElementById('cust-name') ? document.getElementById('cust-name').value.trim() : "Customer",
-            phone: document.getElementById('cust-phone') ? document.getElementById('cust-phone').value.trim() : "",
-            email: document.getElementById('cust-email') ? document.getElementById('cust-email').value.trim() : "order@blueskin.in"
+            name: name,
+            phone: phone,
+            email: email
           },
           handler: function(response) {
-            console.log("YOUPI Success:", response);
-            confirmOrderCreation("YOUPI_PAYMENT_GATEWAY");
+            console.log("YOUPI Verified Payment Response:", response);
+            // கேட்வே உறுதிப்படுத்திய பிறகு மட்டுமே வெப்சைட்டில் ஆர்டர் உறுதி செய்யப்படும்
+            confirmOrderCreation("YOUPI_GATEWAY_SUCCESS");
           },
           onClose: function() {
-            showLuxuryToast("Payment checkout cancelled.");
+            if (typeof showLuxuryToast === 'function') {
+              showLuxuryToast("Payment window closed.");
+            }
           }
         });
       } else {
-        alert("YOUPI SDK லோட் ஆகவில்லை. போர்ட் 7000 இயங்குகிறதா என பார்க்கவும்.");
+        alert("YOUPI SDK லோட் ஆகவில்லை! http://localhost:7000 போர்ட் ஆன்லைனில் உள்ளதா என பார்க்கவும்.");
       }
     }
-
     // --- 15. PAYMENT GATEWAY SANDBOX ---
     function openRazorpayPaymentModal() {
       const keys = Object.keys(cart);
